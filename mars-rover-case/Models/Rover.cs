@@ -55,7 +55,7 @@ namespace mars_rover_case
         /// <summary>
         /// If rover exceeds the border limits, this method will arrange
         /// </summary>
-        private void PlateauBorderControl()
+        public void PlateauBorderControl()
         {
             if (this.Direction == Direction.N && this.PositionY > this.PlateauDimensionY)
                 this.PositionY = this.PlateauDimensionY;
@@ -72,7 +72,7 @@ namespace mars_rover_case
         /// </summary>
         /// <param name="currentDirection"></param>
         /// <returns></returns>
-        private Direction FindNextLeftDirection(Direction currentDirection)
+        public Direction FindNextLeftDirection(Direction currentDirection)
         {
             if (currentDirection == Direction.N)
                 return Direction.W;
@@ -90,7 +90,7 @@ namespace mars_rover_case
         /// </summary>
         /// <param name="currentDirection"></param>
         /// <returns></returns>
-        private Direction FindNextRightDirection(Direction currentDirection)
+        public Direction FindNextRightDirection(Direction currentDirection)
         {
             if (currentDirection == Direction.N)
                 return Direction.E;
