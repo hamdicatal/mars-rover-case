@@ -8,7 +8,6 @@ namespace mars_rover_case
         // temel olarak case'deki çıktıyı verecek şekilde düzenlemeler yapıldı.
 
         // todo: unit testleri yazılacak.
-        // todo: plato sınırlarının dışına çıkması durumu için kontroller eklenecek. 0'dan küçükse veya 5'den büyük 0 setlenebilir. 
 
         static void Main(string[] args)
         {
@@ -27,14 +26,17 @@ namespace mars_rover_case
             roversInfo.Add(Console.ReadLine()); // rover2 first position
             roversInfo.Add(Console.ReadLine()); // rover2 commands
 
-            // creating plateaus
+            // creating plateau with given input
             string[] plateauDimensions = plateauInfo.Split(' ');
-            Plateau plateau1 = new Plateau(int.Parse(plateauDimensions[0]), int.Parse(plateauDimensions[1]));
-            Plateau plateau2 = new Plateau(int.Parse(plateauDimensions[0]), int.Parse(plateauDimensions[1]));
+            Plateau plateau = new Plateau(int.Parse(plateauDimensions[0]), int.Parse(plateauDimensions[1]));
 
             // creating rovers
             Rover rover1 = new Rover();
             Rover rover2 = new Rover();
+
+            // setting up plateau dimensions for rovers
+            rover1.SettingUpPlateuDimensions(plateau);
+            rover2.SettingUpPlateuDimensions(plateau);
 
             int count = 0;
             foreach (var info in roversInfo)
@@ -42,52 +44,33 @@ namespace mars_rover_case
                 if (count == 0) // setting up rover1 position and direction
                 {
                     string[] roverFirstPosition = info.Split(' ');
-                    rover1.PositionX = int.Parse(roverFirstPosition[0]);
-                    rover1.PositionY = int.Parse(roverFirstPosition[1]);
-                    rover1.Direction = (Direction)Enum.Parse(typeof(Direction), roverFirstPosition[2]);
+                    rover1.SettingUpPositionAndDirection(
+                        int.Parse(roverFirstPosition[0]), // Position X
+                        int.Parse(roverFirstPosition[1]), // Position Y
+                        (Direction)Enum.Parse(typeof(Direction), roverFirstPosition[2]) // Direction
+                    );
                 }
                 else if (count == 1) // setting up rover1 commands
                 {
                     string[] roverCommands = info.Split(' ');
-                    rover1.Commands = new List<Command>();
-
-                    for (int i = 0; i < roverCommands.Length; i++)
-                    {
-                        Command cmd = (Command)Enum.Parse(typeof(Command), roverCommands[i]);
-                        rover1.Commands.Add(cmd);
-                    }
+                    rover1.SettingUpCommands(roverCommands);
                 }
                 else if (count == 2) // setting up rover2 position and direction
                 {
                     string[] roverFirstPosition = info.Split(' ');
-                    rover2.PositionX = int.Parse(roverFirstPosition[0]);
-                    rover2.PositionY = int.Parse(roverFirstPosition[1]);
-                    rover2.Direction = (Direction)Enum.Parse(typeof(Direction), roverFirstPosition[2]);
+                    rover2.SettingUpPositionAndDirection(
+                        int.Parse(roverFirstPosition[0]), // Position X
+                        int.Parse(roverFirstPosition[1]), // Position Y
+                        (Direction)Enum.Parse(typeof(Direction), roverFirstPosition[2]) // Direction
+                    );
                 }
                 else if (count == 3) // setting up rover2 commands
                 {
                     string[] roverCommands = info.Split(' ');
-                    rover2.Commands = new List<Command>();
-
-                    for (int i = 0; i < roverCommands.Length; i++)
-                    {
-                        Command cmd = (Command)Enum.Parse(typeof(Command), roverCommands[i]);
-                        rover2.Commands.Add(cmd);
-                    }
+                    rover2.SettingUpCommands(roverCommands);
                 }
                 count++;
             }
-
-            // adding plateau infos to rovers and setting up plateaus current positions
-            rover1.Plateau = plateau1;
-            rover1.Plateau.CurrentPositionX = rover1.PositionX;
-            rover1.Plateau.CurrentPositionY = rover1.PositionY;
-            rover1.Plateau.CurrentDirection = rover1.Direction;
-
-            rover2.Plateau = plateau2;
-            rover2.Plateau.CurrentPositionX = rover2.PositionX;
-            rover2.Plateau.CurrentPositionY = rover2.PositionY;
-            rover2.Plateau.CurrentDirection = rover2.Direction;
 
             Console.WriteLine("Waiting for results...");
 
