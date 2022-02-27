@@ -18,7 +18,7 @@ namespace mars_rover_case
         /// <summary>
         /// This is our main move method.
         /// </summary>
-        public void Move()
+        public string Move()
         {
             // loop in the all given commands
             foreach (var cmd in this.Commands)
@@ -49,7 +49,7 @@ namespace mars_rover_case
                 }
             }
 
-            Console.WriteLine($"{PositionX} {PositionY} {Direction}");
+            return $"{PositionX} {PositionY} {Direction}";
         }
 
         /// <summary>

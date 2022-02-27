@@ -74,8 +74,8 @@ namespace mars_rover_case
 
             Console.WriteLine("Waiting for results...");
 
-            rover1.Move();
-            rover2.Move();
+            Console.WriteLine(rover1.Move());
+            Console.WriteLine(rover2.Move());
 
         }
     }
