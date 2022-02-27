@@ -5,20 +5,15 @@ namespace mars_rover_case
 {
     class Program
     {
-        // temel olarak case'deki çıktıyı verecek şekilde düzenlemeler yapıldı.
-
-        // todo: unit testleri yazılacak.
-
         static void Main(string[] args)
         {
-            string plateauInfo = string.Empty;
             List<string> roversInfo = new List<string>();
 
             Console.WriteLine("Welcome To Mars Rover Simulation");
             Console.WriteLine("Waiting for you inputs...");
 
             // getting inputs
-            plateauInfo = Console.ReadLine();
+            string plateauInfo = Console.ReadLine();
 
             roversInfo.Add(Console.ReadLine()); // rover1 first position
             roversInfo.Add(Console.ReadLine()); // rover1 commands
@@ -38,6 +33,7 @@ namespace mars_rover_case
             rover1.SettingUpPlateuDimensions(plateau);
             rover2.SettingUpPlateuDimensions(plateau);
 
+            // 
             int count = 0;
             foreach (var info in roversInfo)
             {
