@@ -2,8 +2,8 @@
 {
     public enum Command
     {
-        L = 1,
-        R = 2,
-        M = 3
+        L = 1,  // Left
+        R = 2,  // Right
+        M = 3   // Move
     }
 }
