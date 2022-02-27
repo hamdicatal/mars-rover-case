@@ -7,33 +7,47 @@ namespace mars_rover_case
     {
         static void Main(string[] args)
         {
-            List<string> roversInfo = new List<string>();
-
-            Console.WriteLine("Welcome To Mars Rover Simulation");
-            Console.WriteLine("Waiting for you inputs...");
-
-            // getting inputs
-            string plateauInfo = Console.ReadLine();
-
-            roversInfo.Add(Console.ReadLine()); // rover1 first position
-            roversInfo.Add(Console.ReadLine()); // rover1 commands
-
-            roversInfo.Add(Console.ReadLine()); // rover2 first position
-            roversInfo.Add(Console.ReadLine()); // rover2 commands
-
-            // creating plateau with given input
-            string[] plateauDimensions = plateauInfo.Split(' ');
-            Plateau plateau = new Plateau(int.Parse(plateauDimensions[0]), int.Parse(plateauDimensions[1]));
+            // declaration of neccessary variables
+            string plateauInfo;
+            List<string> roversInfo;
 
             // creating rovers
             Rover rover1 = new Rover();
             Rover rover2 = new Rover();
 
+            // getting inputs
+            GetUserInputs(out plateauInfo, out roversInfo);
+
+            // creating plateau with given input
+            Plateau plateau = CreatePlateau(plateauInfo);
+
+            // creating rover vehicles
+            CreateRovers(roversInfo, plateau, rover1, rover2);
+
+            // move rovers on plateau
+            MoveRovers(rover1, rover2);
+        }
+
+        private static Plateau CreatePlateau(string plateauInfo)
+        {
+            string[] plateauDimensions = plateauInfo.Split(' ');
+            return new Plateau(int.Parse(plateauDimensions[0]), int.Parse(plateauDimensions[1]));
+        }
+
+        private static void MoveRovers(Rover rover1, Rover rover2)
+        {
+            Console.WriteLine("Waiting for results...");
+
+            Console.WriteLine(rover1.Move());
+            Console.WriteLine(rover2.Move());
+        }
+
+        private static void CreateRovers(List<string> roversInfo, Plateau plateau, Rover rover1, Rover rover2)
+        {
             // setting up plateau dimensions for rovers
             rover1.SettingUpPlateuDimensions(plateau);
             rover2.SettingUpPlateuDimensions(plateau);
 
-            // 
             int count = 0;
             foreach (var info in roversInfo)
             {
@@ -67,12 +81,21 @@ namespace mars_rover_case
                 }
                 count++;
             }
+        }
 
-            Console.WriteLine("Waiting for results...");
+        private static void GetUserInputs(out string plateauInfo, out List<string> roversInfo)
+        {
+            Console.WriteLine("Welcome To Mars Rover Simulation");
+            Console.WriteLine("Waiting for you inputs...");
 
-            Console.WriteLine(rover1.Move());
-            Console.WriteLine(rover2.Move());
+            plateauInfo = Console.ReadLine();
 
+            roversInfo = new List<string>();
+            roversInfo.Add(Console.ReadLine()); // rover1 first position
+            roversInfo.Add(Console.ReadLine()); // rover1 commands
+
+            roversInfo.Add(Console.ReadLine()); // rover2 first position
+            roversInfo.Add(Console.ReadLine()); // rover2 commands
         }
     }
 }
