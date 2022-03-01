@@ -101,7 +101,9 @@ namespace mars_rover_case
 
         private static void GetUserInputs(out string plateauInfo, out List<string> roversInfo)
         {
-            Console.WriteLine("Welcome To Mars Rover Simulation");
+            Console.WriteLine("======================================");
+            Console.WriteLine("== Welcome To Mars Rover Simulation ==");
+            Console.WriteLine("======================================");
             Console.WriteLine("Waiting for you inputs...");
             Console.WriteLine("======================================");
 
