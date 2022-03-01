@@ -47,7 +47,7 @@ namespace MarsRoverCase.UnitTests
             string moveOutput = rover.Move();
 
             //assert
-            Assert.Equal("0 3 W", moveOutput);
+            Assert.StartsWith("0 3 W", moveOutput);
         }
 
         [Fact]

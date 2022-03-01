@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mars_rover_case.Helpers;
+using System;
 using System.Collections.Generic;
 
 namespace mars_rover_case
@@ -15,18 +16,30 @@ namespace mars_rover_case
             Rover rover1 = new Rover();
             Rover rover2 = new Rover();
 
-            // getting inputs
+            // getting input formats
             GetUserInputs(out plateauInfo, out roversInfo);
 
-            // creating plateau with given input
-            Plateau plateau = CreatePlateau(plateauInfo);
+            // check user inputs
+            bool inputCheck =  InputValidationHelper.CheckUserInputs(plateauInfo, roversInfo);
+            if (inputCheck)
+            {
+                // creating plateau with given input
+                Plateau plateau = CreatePlateau(plateauInfo);
 
-            // creating rover vehicles
-            CreateRovers(roversInfo, plateau, rover1, rover2);
+                // creating rover vehicles
+                CreateRovers(roversInfo, plateau, rover1, rover2);
 
-            // move rovers on plateau
-            MoveRovers(rover1, rover2);
+                // move rovers on plateau
+                MoveRovers(rover1, rover2);
+            }
+            else
+            {
+                Console.WriteLine("======================================");
+                Console.WriteLine("Input Error! Please try again and give expected input.");
+                Console.WriteLine("======================================");
+            }
         }
+
 
         private static Plateau CreatePlateau(string plateauInfo)
         {
@@ -36,10 +49,13 @@ namespace mars_rover_case
 
         private static void MoveRovers(Rover rover1, Rover rover2)
         {
+            Console.WriteLine("======================================");
             Console.WriteLine("Waiting for results...");
+            Console.WriteLine("======================================");
 
             Console.WriteLine(rover1.Move());
             Console.WriteLine(rover2.Move());
+            Console.WriteLine("======================================");
         }
 
         private static void CreateRovers(List<string> roversInfo, Plateau plateau, Rover rover1, Rover rover2)
@@ -62,7 +78,7 @@ namespace mars_rover_case
                 }
                 else if (count == 1) // setting up rover1 commands
                 {
-                    string[] roverCommands = info.Split(' ');
+                    char[] roverCommands = info.ToCharArray();
                     rover1.SettingUpCommands(roverCommands);
                 }
                 else if (count == 2) // setting up rover2 position and direction
@@ -76,7 +92,7 @@ namespace mars_rover_case
                 }
                 else if (count == 3) // setting up rover2 commands
                 {
-                    string[] roverCommands = info.Split(' ');
+                    char[] roverCommands = info.ToCharArray();
                     rover2.SettingUpCommands(roverCommands);
                 }
                 count++;
@@ -87,15 +103,17 @@ namespace mars_rover_case
         {
             Console.WriteLine("Welcome To Mars Rover Simulation");
             Console.WriteLine("Waiting for you inputs...");
+            Console.WriteLine("======================================");
 
-            plateauInfo = Console.ReadLine();
+            plateauInfo = Console.ReadLine()?.ToUpper();
 
             roversInfo = new List<string>();
-            roversInfo.Add(Console.ReadLine()); // rover1 first position
-            roversInfo.Add(Console.ReadLine()); // rover1 commands
+            roversInfo.Add(Console.ReadLine()?.ToUpper()); // rover1 first position
+            roversInfo.Add(Console.ReadLine()?.ToUpper()); // rover1 commands
 
-            roversInfo.Add(Console.ReadLine()); // rover2 first position
-            roversInfo.Add(Console.ReadLine()); // rover2 commands
+            roversInfo.Add(Console.ReadLine()?.ToUpper()); // rover2 first position
+            roversInfo.Add(Console.ReadLine()?.ToUpper()); // rover2 commands
         }
+
     }
 }
