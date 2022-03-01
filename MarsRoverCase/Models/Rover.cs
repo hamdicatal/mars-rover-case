@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace mars_rover_case
+namespace MarsRoverCase
 {
 
     public class Rover

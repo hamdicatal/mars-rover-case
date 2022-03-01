@@ -1,8 +1,8 @@
-﻿using mars_rover_case.Helpers;
+﻿using MarsRoverCase.Helpers;
 using System;
 using System.Collections.Generic;
 
-namespace mars_rover_case
+namespace MarsRoverCase
 {
     class Program
     {

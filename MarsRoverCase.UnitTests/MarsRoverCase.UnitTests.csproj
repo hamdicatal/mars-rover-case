@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\mars-rover-case\MarsRoverCase.csproj" />
+    <ProjectReference Include="..\MarsRoverCase\MarsRoverCase.csproj" />
   </ItemGroup>
 
 </Project>

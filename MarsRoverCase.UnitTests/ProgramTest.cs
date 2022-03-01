@@ -1,4 +1,4 @@
-using mars_rover_case;
+using MarsRoverCase;
 using System.Collections.Generic;
 using Xunit;
 

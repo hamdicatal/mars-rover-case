@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mars_rover_case.Helpers
+namespace MarsRoverCase.Helpers
 {
     public static class InputValidationHelper
     {
